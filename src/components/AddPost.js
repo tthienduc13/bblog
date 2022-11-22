@@ -19,7 +19,7 @@ function AddPost({ functionSetButtonPopup }) {
           </div>
           <div className="flex flex-row justify-center items-center py-4 cursor-pointer ">
             <button className="w-1/3 text-center text-lg font-medium py-2 hover:rounded-lg hover:bg-[#f0f2f5]">
-              <i class="fa-solid mr-4 fa-video text-red-500"></i>
+              <i className="fa-solid mr-4 fa-video text-red-500"></i>
               Live video
             </button>
             <button className="w-1/3 text-center text-lg font-medium py-2 hover:rounded-lg hover:bg-[#f0f2f5]">

@@ -32,7 +32,7 @@ function Overlay(props) {
               className="absolute top-0 right-0 text-3xl hover:opacity-70"
               onClick={() => props.setTrigger(false)}
             >
-              <i class="fa-solid fa-xmark "></i>
+              <i className="fa-solid fa-xmark "></i>
             </button>
           </div>
           <div className="py-4 flex flex-row">

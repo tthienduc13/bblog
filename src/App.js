@@ -19,13 +19,13 @@ function App() {
             functionSetButtonPopup={(active) => setButtonPopup(active)}
           ></AddPost>
           {/* AddPost components */}
-          <Post postList={postList} functionSetPost={setPostList}></Post>
+          <Post postList={postList} functionSetPostList={setPostList}></Post>
         </div>
       </div>
       <Overlay
         trigger={buttonPopup}
         setTrigger={setButtonPopup}
-        setPost={(posts) => setPostList([posts, ...postList])}
+        setPost={(posts) => setPostList([...postList, posts])}
       ></Overlay>
     </>
   );
