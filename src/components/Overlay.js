@@ -1,22 +1,33 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Post from "./Post";
 function Overlay(props) {
+  const [alert, setAlert] = useState(false);
   const [newPost, setNewPost] = useState({
     id: 0,
     title: "",
     content: "",
     isLiked: false,
   });
-
+  const [message, setMessage] = useState("");
   const handleAdd = () => {
-    props.setPost(newPost);
-    props.setTrigger(false);
-    newPost.id++;
+    if (newPost.content !== "" && newPost.id !== "") {
+      props.setPost(newPost);
+      props.setTrigger(false);
+      newPost.id++;
+      setAlert(false);
+    } else {
+      setMessage("Title or content not found!");
+    }
   };
   const handleEnter = (e) => {
     if (e.code === "Enter") {
-      handleAdd();
+      if (newPost.content !== "" && newPost.id !== "") {
+        handleAdd();
+        setAlert(false);
+      } else {
+        setMessage("Title or content not found!");
+      }
     }
   };
   return props.trigger ? (
@@ -45,7 +56,11 @@ function Overlay(props) {
           <div className="py-2 border-b-2">
             <label>
               <input
-                className="w-full text-2xl outline-none font-semibold border-2 p-2  rounded-lg"
+                className={
+                  alert === true
+                    ? "w-full text-2xl outline-none font-semibold border-red-500 border-2 animate-pulse  p-2  rounded-lg"
+                    : "w-full text-2xl outline-none font-semibold border-2 p-2  rounded-lg"
+                }
                 placeholder="Enter title...."
                 onChange={(e) =>
                   setNewPost({
@@ -53,22 +68,30 @@ function Overlay(props) {
                     title: e.target.value,
                   })
                 }
+                onKeyDown={(e) => handleEnter(e)}
               ></input>
               <textarea
                 rows="4"
                 wrap="soft"
                 cols="100"
                 placeholder="Share your today's story"
-                className="p-2 mt-2 rounded-lg text-xl border-2 w-full min-h-[100px]"
+                className={
+                  alert === true
+                    ? "p-2 mt-2 rounded-lg text-xl border-red-500 border-2 w-full animate-pulse min-h-[100px]"
+                    : "p-2 mt-2 rounded-lg text-xl border-2 w-full min-h-[100px]"
+                }
                 onChange={(e) =>
                   setNewPost({
                     ...newPost,
                     content: e.target.value,
                   })
                 }
-                // onKeyDown={(e) => handleEnter(e)}
+                onKeyDown={(e) => handleEnter(e)}
               ></textarea>
             </label>
+            <div className="text-center italic text-red-600 text-lg">
+              {message}
+            </div>
           </div>
           <button
             className="w-full bg-blue-500 text-2xl font-semibold text-white mt-4 rounded-lg p-2 hover:opacity-80"

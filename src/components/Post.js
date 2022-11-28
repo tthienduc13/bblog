@@ -16,7 +16,15 @@ function Post({ postList, functionSetPostList }) {
   };
   const [show, setShow] = useState(false);
   const handleShow = (index) => {
-    setShow(!show);
+    setShow(
+      postList.map((post, id) => {
+        if (id === index) {
+          return show === false ? true : false;
+        } else {
+          return post;
+        }
+      })
+    );
   };
   console.log(show);
   const handleDelete = (index) => {
@@ -58,7 +66,7 @@ function Post({ postList, functionSetPostList }) {
                   className="font-semibold px-4 py-[2px] text-red-600 text-lg"
                   onClick={() => handleDelete(index)}
                 >
-                  <i className="fa-solid fa-xmark mr-2"></i>
+                  <i className="fa-solid fa-xmark mr-2 "></i>
                   Delete post
                 </button>
               </div>
