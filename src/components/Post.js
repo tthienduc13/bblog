@@ -15,16 +15,8 @@ function Post({ postList, functionSetPostList }) {
     );
   };
   const [show, setShow] = useState(false);
-  const handleShow = (index) => {
-    setShow(
-      postList.map((post, id) => {
-        if (id === index) {
-          return show === false ? true : false;
-        } else {
-          return post;
-        }
-      })
-    );
+  const handleShow = () => {
+    setShow(!show);
   };
   console.log(show);
   const handleDelete = (index) => {
@@ -55,7 +47,7 @@ function Post({ postList, functionSetPostList }) {
           </div>
           <button
             className="absolute top-4 right-8 text-xl"
-            onClick={() => handleShow(index)}
+            onClick={handleShow}
           >
             <i className="fa-solid fa-ellipsis"></i>
           </button>
